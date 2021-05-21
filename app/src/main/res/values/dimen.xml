@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="generalButtonHeight">60dp</dimen>
+    <dimen name="generalButtonWidth">175dp</dimen>
+    <dimen name="generalBtnPadding">20dp</dimen>
+    <dimen name="btnCorner">10dp</dimen>
+    <dimen name="stroke">1dp</dimen>
+</resources>

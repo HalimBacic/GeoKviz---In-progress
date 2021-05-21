@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GeoKviz</string>
+    <string name="newQuiz">New Game</string>
+    <string name="results">Results</string>
+    <string name="exit">Exit</string>
+    <string name="name">Name</string>
+</resources>
