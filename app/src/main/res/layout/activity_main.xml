@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor2"
+    android:background="@color/primaryColorDay"
     tools:context=".MainActivity">
 
+
+
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/newGameBtn"
         android:layout_width="@dimen/generalButtonWidth"
         android:layout_height="@dimen/generalButtonHeight"
         android:text="@string/newQuiz"
@@ -18,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/resBtn"
         android:layout_width="@dimen/generalButtonWidth"
         android:layout_height="@dimen/generalButtonHeight"
         android:text="@string/results"
@@ -26,18 +28,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/newGameBtn"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button
+        android:id="@+id/exitBtn"
         android:layout_width="@dimen/generalButtonWidth"
         android:layout_height="@dimen/generalButtonHeight"
         android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        app:layout_constraintVertical_bias="0.306"/>
+        app:layout_constraintTop_toBottomOf="@+id/resBtn"
+        app:layout_constraintVertical_bias="0.306" />
 
     <ImageButton
         android:id="@+id/settingBtn"
@@ -54,7 +57,7 @@
         android:id="@+id/eng"
         android:src="@mipmap/ic_eng"
         style="@style/generalImage"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/newGameBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/settingBtn"
@@ -64,10 +67,28 @@
     <ImageButton
         style="@style/generalImage"
         android:src="@mipmap/ic_rs"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/newGameBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/eng"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.094" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userNameField"
+        android:layout_width="313dp"
+        android:layout_height="60dp"
+        android:hint="@string/inputUser"
+        android:textColorHint="#3F51B5"
+        app:layout_constraintBottom_toTopOf="@+id/newGameBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.692">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
