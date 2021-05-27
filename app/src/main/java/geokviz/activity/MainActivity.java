@@ -1,16 +1,21 @@
 package geokviz.activity;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.FragmentManager;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
+import geokviz.Country;
+import geokviz.data.CountryDao;
+import geokviz.data.Countrydb;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         settingsBtn = (ImageButton) findViewById(R.id.settingBtn);
         settingsBtn.setOnClickListener(new View.OnClickListener(){

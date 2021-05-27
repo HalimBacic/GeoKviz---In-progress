@@ -1,28 +1,55 @@
 package geokviz;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+@Entity
 public class Country {
 
+    @PrimaryKey
+    @NonNull
+    private String countryName;
     private String capitalCity;
-    private String flag;
-    private ArrayList<String> neighbours;
-    private ArrayList<String> landmarks;
-    private String capitalPin;
+    private ArrayList<String> neighbours = new ArrayList<>();
+    private ArrayList<String> landmarks = new ArrayList<>();
     private String info;
     private String continent;
+    private int level;
 
     public Country() {
     }
 
-    public Country(String capitalCity, String flag, ArrayList<String> neighbours, ArrayList<String> landmarks, String capitalPin, String info, String continent) {
+    public Country(String countryName,String capitalCity, String neighbours,String landmarks,  String info, String continent,int level) {
+        this.countryName = countryName;
         this.capitalCity = capitalCity;
-        this.flag = flag;
-        this.neighbours = neighbours;
-        this.landmarks = landmarks;
-        this.capitalPin = capitalPin;
+
+        this.neighbours.addAll(Arrays.asList(neighbours.split(" ")));
+
+        this.landmarks.addAll(Arrays.asList(neighbours.split(" ")));
+
         this.info = info;
         this.continent = continent;
+        this.level = level;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public String getCapitalCity() {
@@ -31,14 +58,6 @@ public class Country {
 
     public void setCapitalCity(String capitalCity) {
         this.capitalCity = capitalCity;
-    }
-
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
     }
 
     public ArrayList<String> getNeighbours() {
@@ -55,14 +74,6 @@ public class Country {
 
     public void setLandmarks(ArrayList<String> landmarks) {
         this.landmarks = landmarks;
-    }
-
-    public String getCapitalPin() {
-        return capitalPin;
-    }
-
-    public void setCapitalPin(String capitalPin) {
-        this.capitalPin = capitalPin;
     }
 
     public String getInfo() {
