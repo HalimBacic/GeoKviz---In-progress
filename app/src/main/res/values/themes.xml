@@ -61,12 +61,21 @@
         <item name="android:background">@color/primaryDarkColorDay</item>
         <item name="android:textColor">@color/secondaryTextColorDay</item>
         <item name="android:padding">@dimen/generalBtnPadding</item>
+        <item name="android:textSize">@dimen/textSizeOne</item>
     </style>
 
     <style name="answerTextView" parent="Widget.AppCompat.TextView">
         <item name="android:background">@color/primaryDarkColorDay</item>
         <item name="android:textColor">@color/secondaryTextColorDay</item>
         <item name="android:padding">@dimen/generalBtnPaddingSmall</item>
+        <item name="android:textSize">@dimen/textSizeTwo</item>
+    </style>
+
+    <style name="letterTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/primaryDarkColorDay</item>
+        <item name="android:textColor">@color/secondaryTextColorDay</item>
+        <item name="android:padding">@dimen/generalBtnPaddingSmall</item>
+        <item name="android:textSize">@dimen/textSizeLetter</item>
     </style>
 
 </resources>

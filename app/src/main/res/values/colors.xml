@@ -18,4 +18,8 @@
     <color name="secondaryDarkColorNight">#102027</color>
     <color name="primaryTextColorNight">#000000</color>
     <color name="secondaryTextColorNight">#ffffff</color>
+
+    <!-- Other colors -->
+    <color name="correct">#2edf06</color>
+    <color name="incorrect">#df061c</color>
 </resources>

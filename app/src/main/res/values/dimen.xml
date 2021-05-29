@@ -3,8 +3,10 @@
     <dimen name="generalButtonHeight">60dp</dimen>
     <dimen name="generalButtonWidth">175dp</dimen>
     <dimen name="generalBtnPadding">20dp</dimen>
-    <dimen name="generalBtnPaddingSmall">8dp</dimen>
+    <dimen name="generalBtnPaddingSmall">9dp</dimen>
     <dimen name="btnCorner">10dp</dimen>
     <dimen name="stroke">1dp</dimen>
-    <dimen name="textSizeOne">17dp</dimen>
+    <dimen name="textSizeOne">22dp</dimen>
+    <dimen name="textSizeTwo">18dp</dimen>
+    <dimen name="textSizeLetter">10dp</dimen>
 </resources>
