@@ -21,14 +21,14 @@
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:layout_width="382dp"
-        android:layout_height="528dp"
+        android:layout_width="384dp"
+        android:layout_height="589dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guizToolbar"
-        app:layout_constraintVertical_bias="0.306">
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 

@@ -22,11 +22,14 @@ public class CountryConverter {
     public static ArrayList<String> stringToArray(String allinone)
     {
         ArrayList<String> list = new ArrayList<>();
-        String[] strings = allinone.split(" ");
-        for (String str:strings) {
-            list.add(str);
+        if (allinone != null) {
+            String[] strings = allinone.split(" ");
+            for (String str : strings) {
+                list.add(str);
+            }
+            return list;
         }
 
-        return list;
+        return null;
     }
 }

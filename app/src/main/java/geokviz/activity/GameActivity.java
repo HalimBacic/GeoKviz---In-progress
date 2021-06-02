@@ -6,27 +6,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.room.Room;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicReference;
-
 import geokviz.Country;
 import geokviz.FlagQuestions;
+import geokviz.LandmarksQuestions;
 import geokviz.Question;
-import geokviz.data.CountryDao;
 import geokviz.data.Countrydb;
 import geokviz.fragments.FlagFragment;
+import geokviz.fragments.LandmarkFragment;
 import geokviz.fragments.QuestionFragment;
 
 public class GameActivity extends AppCompatActivity {
@@ -35,8 +28,10 @@ public class GameActivity extends AppCompatActivity {
     Countrydb data;
     ArrayList<Question> questions = new ArrayList<>();
     ArrayList<FlagQuestions> flagQuestions = new ArrayList<>();
+    ArrayList<LandmarksQuestions> landQuestions = new ArrayList<>();
     QuestionFragment questionFragment;
     FlagFragment flagFragment;
+    LandmarkFragment landFragment;
     Countrydb db;
     List<Country> list;
 
@@ -52,7 +47,9 @@ public class GameActivity extends AppCompatActivity {
                         db = Countrydb.getInstance(getApplicationContext());
                         list = db.getCountryDao().getAll();
               //          makeQuestion(list);
-                        makeFlagQuestions(list);
+              //          makeFlagQuestions(list);
+
+                        makeLandmarkQuestions(list);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -69,11 +66,67 @@ public class GameActivity extends AppCompatActivity {
 
         Bundle bundle = new Bundle();
     //    bundle.putParcelableArrayList("questions",questions);
-        bundle.putParcelableArrayList("flags",flagQuestions);
+    //    bundle.putParcelableArrayList("flags",flagQuestions);
+        bundle.putParcelableArrayList("landmarks",landQuestions);
 
     //    questionFragment = new QuestionFragment();
-        flagFragment = new FlagFragment();
-        openFragment(flagFragment,bundle);
+     //   flagFragment = new FlagFragment();
+        landFragment = new LandmarkFragment();
+        openFragment(landFragment,bundle);
+    }
+
+    private void makeLandmarkQuestions(List<Country> list)
+    {
+        Random rand = new Random();  // za svako slučajno generisanje broja
+        ArrayList<Integer> numbers = new ArrayList<>(); //niz već odabranih pitanja
+        for(int i=0;i<10;i++)  //10 puta se dodaje pitanje
+        {
+            Country gc;
+            //Generisanje slobodnog broja
+            boolean status = false;
+            int num = 0;
+            while(!status) {
+                int param = list.size();
+                num = rand.nextInt(param);
+                for (Integer n : numbers)
+                    if(n==num) status = true;
+
+                if(!status)
+                {
+                    gc = list.get(num);
+                    if(gc.getLandmarks()!=null)
+                        status = true;
+                }
+            }
+
+            //Dobija se generisan broj iz predhodnog bloka za pitanje koje se dodaje
+            gc = list.get(num);
+            numbers.add(num);
+
+            //Generisanje pogrešnih odgovora
+            ArrayList<String> wrongs = new ArrayList<>();
+            for(int j=0;j<4;j++)
+            {
+                ArrayList<Integer> nums = new ArrayList<>();
+                int num2=0;
+                boolean status2 = false;
+                while(!status2)
+                {
+                    int param = list.size();
+                    num2 = rand.nextInt(param);
+                    if(num2!=num)
+                    {
+                        status2=true;
+                        for(Integer n : nums)
+                            if(n==num2) status2=false;
+                    }
+                }
+                wrongs.add(list.get(num2).getCountryName());
+            }
+            int brojLendmarka = gc.getLandmarks().size();
+            LandmarksQuestions lc = new LandmarksQuestions(gc.getLandmarks().get(brojLendmarka-1),gc.getCountryName(),wrongs);
+            landQuestions.add(lc);
+        }
     }
 
     private void makeFlagQuestions(List<Country> list) {

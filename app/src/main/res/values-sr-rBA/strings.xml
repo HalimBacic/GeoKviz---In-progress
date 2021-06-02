@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GeoKviz</string>
+    <string name="newQuiz">Nova igra</string>
+    <string name="news">Novosti</string>
+    <string name="score">Rezultat</string>
+    <string name="inputUser">Vaše ime?</string>
+    <string name="numq5">5 Pitanja</string>
+    <string name="numq10">10 Pitanja</string>
+    <string name="cacheMode">Uključi memorisanje</string>
+    <string name="lang_sr">Srpski</string>
+    <string name="lang_en">Engleski</string>
+    <string name="name">Ime</string>
+    <string name="exit">Izlaz</string>
+    <string name="results">Rezultati</string>
+</resources>

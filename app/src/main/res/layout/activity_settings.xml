@@ -8,11 +8,10 @@
     android:background="@color/primaryDarkColorDay">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/qnumBtn"
         android:layout_width="@dimen/generalButtonWidth"
         android:layout_height="@dimen/generalButtonHeight"
         android:layout_marginTop="252dp"
-        android:text="@string/numq10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +26,7 @@
         android:textColor="@color/primaryTextColorDay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/qnumBtn"
         android:gravity="center"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 

@@ -1,8 +1,10 @@
 package geokviz;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 
-public class LandmarksQuestions {
+public class LandmarksQuestions implements Parcelable{
 
     private String landmark;
     private String country;
@@ -12,6 +14,37 @@ public class LandmarksQuestions {
         this.landmark = landmark;
         this.country = country;
         this.wrongs = wrongs;
+    }
+
+
+    public LandmarksQuestions(Parcel in) {
+        landmark = in.readString();
+        country = in.readString();
+        wrongs = in.createStringArrayList();
+    }
+
+    public static final Creator<LandmarksQuestions> CREATOR = new Creator<LandmarksQuestions>() {
+        @Override
+        public LandmarksQuestions createFromParcel(Parcel in) {
+            return new LandmarksQuestions(in);
+        }
+
+        @Override
+        public LandmarksQuestions[] newArray(int size) {
+            return new LandmarksQuestions[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(landmark);
+        dest.writeString(country);
+        dest.writeStringList(wrongs);
     }
 
     public String getLandmark() {
