@@ -10,229 +10,252 @@
         android:id="@+id/imageFrame"
         android:layout_width="317dp"
         android:layout_height="220dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="116dp"
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="364dp"
+        android:layout_height="325dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageFrame">
 
         <TextView
-            android:id="@+id/flagAns1"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            android:id="@+id/flagText"
+            style="@style/answerTextView"
+            android:layout_width="233dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.163"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/flagAns2"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+        <ImageButton
+            android:id="@+id/nextBtn"
+            android:layout_width="52dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/primaryColorDay"
+            android:src="@drawable/ic_go_foreground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.517"
+            app:layout_constraintStart_toEndOf="@+id/flagText"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/flagAns3"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="325dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/flagAns4"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns1"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns5"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns2"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns6"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns3"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns7"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns4"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns8"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns5"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns9"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/flagAns10"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="325dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-    <LinearLayout
-        android:layout_width="345dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.07">
+            <TextView
+                android:id="@+id/flagAns8"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns11"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns9"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns12"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns10"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns13"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns11"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns14"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns12"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/flagAns15"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="325dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.833"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-        <TextView
-            android:id="@+id/flagAns16"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns17"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns15"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns18"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns16"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns19"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/flagAns17"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/flagAns20"
-            style="@style/letterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/flagAns18"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/flagText"
-        style="@style/answerTextView"
-        android:layout_width="211dp"
-        android:layout_height="49dp"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.165"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageFrame"
-        app:layout_constraintVertical_bias="0.47" />
+            <TextView
+                android:id="@+id/flagAns19"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/nextBtn"
-        android:layout_width="52dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="36dp"
-        android:background="@color/primaryColorDay"
-        android:src="@drawable/ic_go_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.713"
-        app:layout_constraintStart_toEndOf="@+id/flagText"
-        app:layout_constraintTop_toBottomOf="@+id/imageFrame" />
+        <LinearLayout
+            android:layout_width="325dp"
+            android:layout_height="45dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintVertical_bias="0.543">
 
-    <ImageButton
-        android:id="@+id/checkBtn"
-        android:layout_width="52dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="36dp"
-        android:src="@drawable/ic_q_foreground"
-        app:layout_constraintEnd_toStartOf="@+id/nextBtn"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/flagText"
-        app:layout_constraintTop_toBottomOf="@+id/imageFrame" />
+            <TextView
+                android:id="@+id/flagAns20"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/flagAns13"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/flagAns14"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/flagAns6"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/flagAns7"
+                style="@style/letterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

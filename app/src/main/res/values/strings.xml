@@ -9,6 +9,7 @@
     <string name="cacheMode">Enable cache</string>
     <string name="numq10">10 Questions</string>
     <string name="numq5">5 Questions</string>
+    <string name="questions">Questions</string>
     <string name="inputUser">Your name?</string>
     <string name="score">Score</string>
     <string name="news">News</string>

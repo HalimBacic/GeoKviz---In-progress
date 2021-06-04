@@ -1,8 +1,10 @@
 package geokviz.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -23,12 +25,10 @@ import geokviz.data.Countrydb;
 public class MainActivity extends AppCompatActivity {
 
     ImageButton settingsBtn;
-    ImageButton engBtn;
-    ImageButton rsBtn;
     Button resBtn;
     Button exitBtn;
     Button newGameBtn;
-    Locale myLocale;
+    String LANG_CURRENT = "sr";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,22 +63,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(gameIntent);
             }
         });
+    }
 
-        engBtn = (ImageButton) findViewById(R.id.eng);
-        engBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    protected void attachBaseContext(Context newBase) {
 
-            }
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(newBase);
+        LANG_CURRENT = preferences.getString("Language", "sr-rBA");
 
-        });
-
-        rsBtn = (ImageButton) findViewById(R.id.rs);
-        rsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
 }

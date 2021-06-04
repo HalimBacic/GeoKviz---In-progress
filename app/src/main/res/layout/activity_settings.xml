@@ -18,16 +18,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
+        android:id="@+id/switch1"
         android:layout_width="@dimen/generalButtonWidth"
         android:layout_height="@dimen/generalButtonHeight"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="32dp"
         android:background="@color/secondaryColorDay"
+        android:gravity="center"
         android:text="@string/cacheMode"
         android:textColor="@color/primaryTextColorDay"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qnumBtn"
-        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/srBtn"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <ImageButton
@@ -41,5 +43,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_back_round"
         style="@style/generalImage"/>
+
+    <Button
+        android:id="@+id/engBtn"
+        android:layout_width="@dimen/generalButtonWidth"
+        android:layout_height="@dimen/generalButtonHeight"
+        android:layout_marginTop="40dp"
+        android:text="@string/lang_en"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qnumBtn" />
+
+    <Button
+        android:id="@+id/srBtn"
+        android:layout_width="@dimen/generalButtonWidth"
+        android:layout_height="@dimen/generalButtonHeight"
+        android:layout_marginTop="36dp"
+        android:text="@string/lang_sr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engBtn" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

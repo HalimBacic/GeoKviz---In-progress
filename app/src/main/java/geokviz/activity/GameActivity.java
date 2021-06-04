@@ -6,6 +6,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +38,7 @@ public class GameActivity extends AppCompatActivity {
     LandmarkFragment landFragment;
     Countrydb db;
     List<Country> list;
+    String LANG_CURRENT="sr";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
         ).start();
 
         setSupportActionBar(findViewById(R.id.guizToolbar));
-        setTitle("Score ");
+        setTitle(R.string.score);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle = new Bundle();
@@ -85,18 +90,16 @@ public class GameActivity extends AppCompatActivity {
             //Generisanje slobodnog broja
             boolean status = false;
             int num = 0;
-            while(!status) {
-                int param = list.size();
-                num = rand.nextInt(param);
-                for (Integer n : numbers)
-                    if(n==num) status = true;
-
-                if(!status)
-                {
-                    gc = list.get(num);
-                    if(gc.getLandmarks()!=null)
-                        status = true;
-                }
+            while(!status)
+            {
+                status = true;
+                num = rand.nextInt(list.size()-1);
+                if(!numbers.isEmpty())
+                    for (Integer n : numbers) {
+                        if(n==num) status = false;
+                    }
+                if(list.get(num).getLandmarks()==null)
+                    status = false;
             }
 
             //Dobija se generisan broj iz predhodnog bloka za pitanje koje se dodaje
@@ -112,15 +115,14 @@ public class GameActivity extends AppCompatActivity {
                 boolean status2 = false;
                 while(!status2)
                 {
-                    int param = list.size();
-                    num2 = rand.nextInt(param);
-                    if(num2!=num)
-                    {
-                        status2=true;
-                        for(Integer n : nums)
-                            if(n==num2) status2=false;
-                    }
+                    status2 = true;
+                    num2 = rand.nextInt(list.size()-1);
+                    if(!nums.isEmpty())
+                        for (Integer n : nums) {
+                            if(n==num2) status2 = false;
+                        }
                 }
+                nums.add(num2);
                 wrongs.add(list.get(num2).getCountryName());
             }
             int brojLendmarka = gc.getLandmarks().size();
@@ -235,5 +237,14 @@ public class GameActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragmentContainer,fragment,"");
         ft.commit();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(newBase);
+        LANG_CURRENT = preferences.getString("Language", "sr-rBA");
+
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, LANG_CURRENT));
     }
 }

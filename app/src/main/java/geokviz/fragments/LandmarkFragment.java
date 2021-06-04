@@ -1,5 +1,7 @@
 package geokviz.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -142,7 +144,7 @@ public class LandmarkFragment extends Fragment {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(5000);
+                            Thread.sleep(800);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -177,16 +179,8 @@ public class LandmarkFragment extends Fragment {
         {
             Bundle bundle = getArguments();
             questions =  bundle.getParcelableArrayList("landmarks");
-            Properties properties = new Properties();
-            AssetManager assetManager = getContext().getAssets();
-            InputStream inputStream = null;
-            try {
-                inputStream = assetManager.open("app.properties");
-                properties.load(inputStream);
-                qpnum = Integer.parseInt(properties.getProperty("qnum"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+            qpnum = preferences.getInt("qnumber",10);
         }
 
         return view;

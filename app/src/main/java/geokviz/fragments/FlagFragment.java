@@ -1,5 +1,7 @@
 package geokviz.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 
@@ -176,18 +178,9 @@ public class FlagFragment extends Fragment {
         {
             Bundle bundle = getArguments();
             flags =  bundle.getParcelableArrayList("flags");
-            Properties properties = new Properties();
-            AssetManager assetManager = getContext().getAssets();
-            InputStream inputStream = null;
-            try {
-                inputStream = assetManager.open("app.properties");
-                properties.load(inputStream);
-                qpnum = Integer.parseInt(properties.getProperty("qnum"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+            qnum = preferences.getInt("qnumber",10);
         }
-
         return view;
     }
 }
