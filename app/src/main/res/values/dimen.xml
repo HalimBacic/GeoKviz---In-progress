@@ -8,5 +8,6 @@
     <dimen name="stroke">1dp</dimen>
     <dimen name="textSizeOne">22dp</dimen>
     <dimen name="textSizeTwo">18dp</dimen>
-    <dimen name="textSizeLetter">10dp</dimen>
+    <dimen name="textSizeLetter">19dp</dimen>
+    <dimen name="generalTextPaddingSmall">3dp</dimen>
 </resources>

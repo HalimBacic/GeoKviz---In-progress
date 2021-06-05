@@ -10,6 +10,10 @@
     <string name="numq10">10 Questions</string>
     <string name="numq5">5 Questions</string>
     <string name="questions">Questions</string>
+    <string name="question">Which is capital city of </string>
+    <string name="flag">Which country does the flag belong to?</string>
+    <string name="landmark">Which country does the landmark belong to?</string>
+    <string name="neighbours">Pick neighbour</string>
     <string name="inputUser">Your name?</string>
     <string name="score">Score</string>
     <string name="news">News</string>

@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -148,7 +150,18 @@ public class LandmarkFragment extends Fragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        if(qnum<qpnum)
                         Initialize();
+                        else
+                        {
+                            Bundle bundle = getArguments();
+                            NeighboursFragment fragment = new NeighboursFragment();
+                            fragment.setArguments(bundle);
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            ft.replace(R.id.fragmentContainer,fragment,"");
+                            ft.commit();
+                        }
                     }
                 });
             }

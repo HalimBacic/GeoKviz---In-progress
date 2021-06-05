@@ -14,4 +14,8 @@
     <string name="name">Ime</string>
     <string name="exit">Izlaz</string>
     <string name="results">Rezultati</string>
+    <string name="question">Odredi glavni grad: </string>
+    <string name="flag">Kojoj državi pripada zastava?</string>
+    <string name="landmark">Kojoj državi pripada znamenitost?</string>
+    <string name="neighbours">Odaberi susjednu državu</string>
 </resources>

@@ -6,7 +6,10 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import geokviz.FlagQuestions;
+import geokviz.Question;
 import geokviz.activity.R;
 
 /**
@@ -44,7 +48,6 @@ public class FlagFragment extends Fragment {
     TextView flagText;
     ImageView imageView;
     ImageButton nextBtn;
-    ImageButton checkBtn;
     int qpnum;
     int qnum=0;
 
@@ -77,7 +80,6 @@ public class FlagFragment extends Fragment {
         imageView = (ImageView) getView().findViewById(R.id.imageFrame);
         nextBtn = (ImageButton) getView().findViewById(R.id.nextBtn);
         nextBtn.setClickable(false);
-        checkBtn = (ImageButton) getView().findViewById(R.id.checkBtn);
         chars.add((TextView) getView().findViewById(R.id.flagAns1));
         chars.add((TextView) getView().findViewById(R.id.flagAns2));
         chars.add((TextView) getView().findViewById(R.id.flagAns3));
@@ -100,25 +102,11 @@ public class FlagFragment extends Fragment {
         chars.add((TextView) getView().findViewById(R.id.flagAns20));
         flagText = (TextView) getView().findViewById(R.id.flagText);
 
-        checkBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = flagText.getText().toString();
-                String name2 = flags.get(qnum).getFlag();
-                if(name.equals(name2))
-                    flagText.setBackgroundResource(R.color.correct);
-                else
-                    flagText.setBackgroundResource(R.color.incorrect);
-                nextBtn.setClickable(true);
-                qnum++;
-            }
-        });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(qnum<qpnum)
-                    Initialize();
+                    checkIsValid();
             }
         });
 
@@ -136,6 +124,50 @@ public class FlagFragment extends Fragment {
         Initialize();
     }
 
+
+    private void checkIsValid() {
+        FlagQuestions currentQuestion = flags.get(qnum-1);
+        TextView text = (TextView) getActivity().findViewById(R.id.flagText);
+        String input = text.getText().toString();
+        if(input.equals(currentQuestion.getAnswer()))
+            text.setBackgroundResource(R.color.correct);
+        else
+            text.setBackgroundResource(R.color.incorrect);
+
+        delayAnswer();
+    }
+
+    private void delayAnswer() {
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(800);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        if(qnum<qpnum)
+                            Initialize();
+                        else
+                        {
+                            Bundle bundle = getArguments();
+                            LandmarkFragment fragment = new LandmarkFragment();
+                            fragment.setArguments(bundle);
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            ft.replace(R.id.fragmentContainer,fragment,"");
+                            ft.commit();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
     private void Initialize() {
         ResetColors();
         Random rand = new Random();
@@ -148,6 +180,7 @@ public class FlagFragment extends Fragment {
         String flagname = "ic_"+flags.get(qnum).getFlag().toLowerCase();
         int id = getResources().getIdentifier(flagname,"mipmap",getContext().getPackageName());
         imageView.setImageResource(id);
+        qnum++;
     }
 
     private void ResetColors() {
@@ -179,7 +212,7 @@ public class FlagFragment extends Fragment {
             Bundle bundle = getArguments();
             flags =  bundle.getParcelableArrayList("flags");
             SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
-            qnum = preferences.getInt("qnumber",10);
+            qpnum = preferences.getInt("qnumber",10);
         }
         return view;
     }

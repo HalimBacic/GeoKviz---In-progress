@@ -14,4 +14,8 @@
     <string name="inputUser">Your name?</string>
     <string name="score">Score</string>
     <string name="news">News</string>
+    <string name="question">Which is capital city of </string>
+    <string name="flag">Which country does the flag belong to?</string>
+    <string name="landmark">Which country does the landmark belong to?</string>
+    <string name="neighbours">Pick neighbour</string>
 </resources>

@@ -8,22 +8,26 @@
 
     <ImageView
         android:id="@+id/imageFrame"
-        android:layout_width="317dp"
-        android:layout_height="220dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="271dp"
+        android:layout_height="177dp"
+        android:layout_marginTop="136dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="364dp"
         android:layout_height="325dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageFrame">
+        app:layout_constraintTop_toBottomOf="@+id/imageFrame"
+        app:layout_constraintVertical_bias="0.629">
 
         <TextView
             android:id="@+id/flagText"
@@ -53,9 +57,9 @@
             android:id="@+id/linearLayout2"
             android:layout_width="325dp"
             android:layout_height="45dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -65,7 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="" />
 
             <TextView
                 android:id="@+id/flagAns2"
@@ -105,9 +110,9 @@
             android:id="@+id/linearLayout4"
             android:layout_width="325dp"
             android:layout_height="45dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
@@ -159,7 +164,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.833"
+            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
@@ -206,11 +211,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout6"
             android:layout_width="325dp"
             android:layout_height="45dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
             app:layout_constraintVertical_bias="0.543">
@@ -256,6 +262,17 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/labelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="@string/flag"
+        app:layout_constraintBottom_toTopOf="@+id/imageFrame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487" />
 </androidx.constraintlayout.widget.ConstraintLayout>

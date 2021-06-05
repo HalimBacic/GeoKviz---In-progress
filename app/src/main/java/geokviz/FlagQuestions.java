@@ -36,7 +36,7 @@ public class FlagQuestions implements Parcelable {
     };
 
     public String getFlag() {
-        return flag.toLowerCase();
+        return flag.toLowerCase().replace(" ","");
     }
 
     public void setFlag(String flag) {

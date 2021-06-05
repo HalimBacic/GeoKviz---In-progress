@@ -2,7 +2,6 @@ package geokviz.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,29 +12,21 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Properties;
+import java.util.Collections;
 import java.util.Random;
 
-import geokviz.FlagQuestions;
-import geokviz.Question;
+import geokviz.NeighboursQuestions;
 import geokviz.activity.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link QuestionFragment#newInstance} factory method to
+ * Use the {@link NeighboursFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuestionFragment extends Fragment {
+public class NeighboursFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +36,8 @@ public class QuestionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ArrayList<Question> questions;
+
+    ArrayList<NeighboursQuestions> questions;
     TextView question;
     TextView ansA;
     TextView ansB;
@@ -53,6 +45,57 @@ public class QuestionFragment extends Fragment {
     TextView ansD;
     int qnum=0;
     int qpnum;
+
+    public NeighboursFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment NeighboursFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static NeighboursFragment newInstance(String param1, String param2) {
+        NeighboursFragment fragment = new NeighboursFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_neighbours, container, false);
+        if (savedInstanceState != null) {
+            savedInstanceState = getArguments();
+            questions = savedInstanceState.getParcelableArrayList("neighbours");
+        }
+        else
+        {
+            Bundle bundle = getArguments();
+            questions =  bundle.getParcelableArrayList("neighbours");
+            SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+            qpnum = preferences.getInt("qnumber",10);
+        }
+
+        return view;
+    }
 
     @Override
     public void onStart() {
@@ -98,8 +141,8 @@ public class QuestionFragment extends Fragment {
     }
 
     private void checkIsValid(TextView textField) {
-        Question currentQuestion = questions.get(qnum-1);
-        if(textField.getText() == currentQuestion.getCorrect())
+        NeighboursQuestions currentQuestion = questions.get(qnum-1);
+        if(checkAnswer(textField.getText().toString(),currentQuestion.getNeighbours()))
             textField.setBackgroundResource(R.color.correct);
         else
             textField.setBackgroundResource(R.color.incorrect);
@@ -124,13 +167,7 @@ public class QuestionFragment extends Fragment {
                             Initialize();
                         else
                         {
-                            Bundle bundle = getArguments();
-                            FlagFragment fragment = new FlagFragment();
-                            fragment.setArguments(bundle);
-                            FragmentManager fm = getActivity().getSupportFragmentManager();
-                            FragmentTransaction ft = fm.beginTransaction();
-                            ft.replace(R.id.fragmentContainer,fragment,"");
-                            ft.commit();
+
                         }
                     }
                 });
@@ -138,84 +175,41 @@ public class QuestionFragment extends Fragment {
         });
     }
 
-    public QuestionFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment QuestionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static QuestionFragment newInstance(String param1, String param2) {
-        QuestionFragment fragment = new QuestionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    private boolean checkAnswer(String checker, ArrayList<String> neighbours) {
+        for (String str: neighbours) {
+            if(checker.equals(str))
+                return true;
         }
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_question, container, false);
-        if (savedInstanceState != null) {
-            savedInstanceState = getArguments();
-            questions = savedInstanceState.getParcelableArrayList("questions");
-        }
-        else
-        {
-            Bundle bundle = getArguments();
-            questions =  bundle.getParcelableArrayList("questions");
-            SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
-            qpnum = preferences.getInt("qnumber",10);
-        }
-
-        return view;
+        return false;
     }
 
     private void Initialize() {
         ResetColors();
-        Question qq = questions.get(qnum);
-        question.setText(qq.question);
+        NeighboursQuestions qq = questions.get(qnum++);
+        Integer neighboursSize = qq.getNeighbours().size();
+        question.setText(qq.getCountry());
+        Collections.shuffle(qq.getWrongs());
         Random random = new Random();
         int cnum = random.nextInt(3);
         switch(cnum)
         {
             case 0:
-                ansA.setText(qq.correct);
-                ansB.setText(qq.incorrect.get(0)); ansC.setText(qq.incorrect.get(1)); ansD.setText(qq.incorrect.get(2));
+                ansA.setText(qq.getNeighbours().get(neighboursSize-1));
+                ansB.setText(qq.getWrongs().get(0)); ansC.setText(qq.getWrongs().get(1)); ansD.setText(qq.getWrongs().get(2));
                 break;
             case 1:
-                ansB.setText(qq.correct);
-                ansA.setText(qq.incorrect.get(0)); ansC.setText(qq.incorrect.get(1)); ansD.setText(qq.incorrect.get(2));
+                ansB.setText(qq.getNeighbours().get(neighboursSize-1));
+                ansA.setText(qq.getWrongs().get(0)); ansC.setText(qq.getWrongs().get(1)); ansD.setText(qq.getWrongs().get(2));
                 break;
             case 2:
-                ansC.setText(qq.correct);
-                ansB.setText(qq.incorrect.get(0)); ansA.setText(qq.incorrect.get(1)); ansD.setText(qq.incorrect.get(2));
+                ansC.setText(qq.getNeighbours().get(neighboursSize-1));
+                ansB.setText(qq.getWrongs().get(0)); ansA.setText(qq.getWrongs().get(1)); ansD.setText(qq.getWrongs().get(2));
                 break;
             case 3:
-                ansD.setText(qq.correct);
-                ansB.setText(qq.incorrect.get(0)); ansC.setText(qq.incorrect.get(1)); ansA.setText(qq.incorrect.get(2));
+                ansD.setText(qq.getNeighbours().get(neighboursSize-1));
+                ansB.setText(qq.getWrongs().get(0)); ansC.setText(qq.getWrongs().get(1)); ansA.setText(qq.getWrongs().get(2));
                 break;
         }
-        qnum++;
     }
 
     private void ResetColors() {
@@ -231,4 +225,5 @@ public class QuestionFragment extends Fragment {
             ansD.setBackgroundResource(R.color.primaryDarkColorDay);
         }
     }
+
 }

@@ -27,5 +27,10 @@ public interface CountryDao {
     @Query("Select landmarks from country where countryName != :name")
     List<String> getLandmarks(String name);
 
+    @Query("Select neighbours from Country where continent != :cont")
+    List<String> getAllFrom(String cont);
+
+    @Query("Select neighbours from Country")
+    List<String> getAllNeighbours();
 
 }

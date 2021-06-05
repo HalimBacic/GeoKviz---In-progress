@@ -74,8 +74,12 @@
     <style name="letterTextView" parent="Widget.AppCompat.TextView">
         <item name="android:background">@color/primaryDarkColorDay</item>
         <item name="android:textColor">@color/secondaryTextColorDay</item>
-        <item name="android:padding">@dimen/generalBtnPaddingSmall</item>
         <item name="android:textSize">@dimen/textSizeLetter</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="labelText" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/primaryTextColorDay</item>
     </style>
 
 </resources>
