@@ -18,4 +18,5 @@
     <string name="flag">Which country does the flag belong to?</string>
     <string name="landmark">Which country does the landmark belong to?</string>
     <string name="neighbours">Pick neighbour</string>
+    <string name="empty">Base is empty</string>
 </resources>

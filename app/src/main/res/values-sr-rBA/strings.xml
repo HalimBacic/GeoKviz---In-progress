@@ -18,4 +18,5 @@
     <string name="flag">Kojoj državi pripada zastava?</string>
     <string name="landmark">Kojoj državi pripada znamenitost?</string>
     <string name="neighbours">Odaberi susjednu državu</string>
+    <string name="empty">Baza podataka je prazna</string>
 </resources>
