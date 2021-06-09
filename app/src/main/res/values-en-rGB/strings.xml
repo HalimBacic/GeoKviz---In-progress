@@ -19,4 +19,23 @@
     <string name="landmark">Which country does the landmark belong to?</string>
     <string name="neighbours">Pick neighbour</string>
     <string name="empty">Base is empty</string>
+    <string name="turkey">Turkey</string>
+    <string name="england">England</string>
+    <string name="germany">Germany</string>
+    <string name="mexico">Mexico</string>
+    <string name="brasil">Brasil</string>
+    <string name="france">France</string>
+    <string name="australia">Australia</string>
+    <string name="canada">Canada</string>
+    <string name="iraq">Iraq</string>
+    <string name="denmark">Denmark</string>
+    <string name="egypt">Egypt</string>
+    <string name="russia">Russia</string>
+    <string name="china">China</string>
+    <string name="poland">Poland</string>
+    <string name="nigeria">Nigeria</string>
+    <string name="morocco">Morocco</string>
+    <string name="south_africa">South Africa</string>
+    <string name="saudi_arabia">Saudi Arabija</string>
+    <string name="united_states">USA</string>
 </resources>

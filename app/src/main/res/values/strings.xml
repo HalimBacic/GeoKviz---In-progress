@@ -9,15 +9,36 @@
     <string name="cacheMode">Enable cache</string>
     <string name="numq10">10 Questions</string>
     <string name="numq5">5 Questions</string>
+
     <string name="questions">Questions</string>
+
     <string name="question">Which is capital city of </string>
     <string name="flag">Which country does the flag belong to?</string>
     <string name="landmark">Which country does the landmark belong to?</string>
     <string name="neighbours">Pick neighbour</string>
+
+    <string name="turkey">Turkey</string>
+    <string name="england">England</string>
+    <string name="south_africa">South Africa</string>
+    <string name="germany">Germany</string>
+    <string name="mexico">Mexico</string>
+    <string name="brasil">Brasil</string>
+    <string name="france">France</string>
+    <string name="australia">Australia</string>
+    <string name="canada">Canada</string>
+    <string name="iraq">Iraq</string>
+    <string name="saudi_arabia">Saudi Arabia</string>
+    <string name="denmark">Denmark</string>
+    <string name="united_states">United States</string>
+    <string name="egypt">Egypt</string>
+    <string name="russia">Russia</string>
+    <string name="china">China</string>
+    <string name="poland">Poland</string>
+    <string name="nigeria">Nigeria</string>
+    <string name="morocco">Morocco</string>
+
     <string name="inputUser">Your name?</string>
     <string name="score">Score</string>
     <string name="news">News</string>
     <string name="empty">Base is empty</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

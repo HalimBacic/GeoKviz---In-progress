@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import org.w3c.dom.Text;
 
@@ -28,6 +29,8 @@ import java.util.Random;
 
 import geokviz.FlagQuestions;
 import geokviz.Question;
+import geokviz.User;
+import geokviz.UserAnswerQuestion;
 import geokviz.activity.R;
 
 /**
@@ -46,6 +49,7 @@ public class QuestionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     ArrayList<Question> questions;
+    User user;
     TextView question;
     TextView ansA;
     TextView ansB;
@@ -99,11 +103,24 @@ public class QuestionFragment extends Fragment {
 
     private void checkIsValid(TextView textField) {
         Question currentQuestion = questions.get(qnum-1);
-        if(textField.getText() == currentQuestion.getCorrect())
+        if(textField.getText() == currentQuestion.getCorrect()) {
             textField.setBackgroundResource(R.color.correct);
-        else
-            textField.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getQuestion(),textField.getText().toString(),true);
+            Integer points = user.getPoints()+10;
+            user.setPoints(points);
+            user.addQuestion(uaq);
 
+            androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.guizToolbar);
+            String scoreText = getResources().getString(R.string.score);
+            scoreText+=" "+user.getPoints().toString();
+            toolbar.setTitle(scoreText);
+
+        }
+        else {
+            textField.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getQuestion(),textField.getText().toString(),false);
+            user.addQuestion(uaq);
+        }
         delayAnswer();
     }
 
@@ -183,6 +200,7 @@ public class QuestionFragment extends Fragment {
         {
             Bundle bundle = getArguments();
             questions =  bundle.getParcelableArrayList("questions");
+            user = bundle.getParcelable("userProfile");
             SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
             qpnum = preferences.getInt("qnumber",10);
         }
@@ -195,6 +213,15 @@ public class QuestionFragment extends Fragment {
         Question qq = questions.get(qnum);
         question.setText(qq.question);
         Random random = new Random();
+
+
+        int landNameId = getResources().getIdentifier(qq.question.toLowerCase().replace(" ","_"),"string",getContext().getPackageName());
+        String landName = getResources().getString(landNameId);
+        String q = getResources().getString(R.string.question);
+        String qt = q +"  "+ landName;
+        question.setText(qt);
+
+
         int cnum = random.nextInt(3);
         switch(cnum)
         {

@@ -13,13 +13,11 @@ public class User implements Parcelable {
     @PrimaryKey
     @NonNull
     private String username;
-    private Integer points;
-    private ArrayList<UserAnswerQuestion> questions;
+    private Integer points = 0;
+    private ArrayList<UserAnswerQuestion> questions = new ArrayList<>();
 
-    public User(String username, Integer points, ArrayList<UserAnswerQuestion> questions) {
+    public User(String username) {
         this.username = username;
-        this.points = points;
-        this.questions = questions;
     }
 
     protected User(Parcel in) {
@@ -83,5 +81,9 @@ public class User implements Parcelable {
         this.questions = questions;
     }
 
+    public void addQuestion(UserAnswerQuestion uaq)
+    {
+        this.questions.add(uaq);
+    }
 
 }

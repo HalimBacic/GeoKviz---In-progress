@@ -24,7 +24,7 @@ public abstract class Countrydb extends RoomDatabase {
 
     private static Countrydb buildDatabaseInstance(Context context) {
         return Room.databaseBuilder(context,
-                Countrydb.class,"country.db").createFromAsset("country.db").build();
+                Countrydb.class,"country.db").createFromAsset("base.db").build();
     }
 
     public void cleanUp(){

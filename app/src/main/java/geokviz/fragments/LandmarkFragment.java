@@ -27,6 +27,8 @@ import java.util.Random;
 
 import geokviz.LandmarksQuestions;
 import geokviz.Question;
+import geokviz.User;
+import geokviz.UserAnswerQuestion;
 import geokviz.activity.R;
 
 /**
@@ -50,6 +52,7 @@ public class LandmarkFragment extends Fragment {
     TextView ansC;
     TextView ansD;
     ImageButton next;
+    User user;
     int qnum=0;
     int qpnum;
 
@@ -129,11 +132,23 @@ public class LandmarkFragment extends Fragment {
 
     private void checkIsValid(TextView textField) {
         LandmarksQuestions currentQuestion = questions.get(qnum-1);
-        if(textField.getText() == currentQuestion.getCountry())
+        if(textField.getText() == currentQuestion.getCountry()) {
             textField.setBackgroundResource(R.color.correct);
-        else
-            textField.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getCountry(),textField.getText().toString(),true);
+            Integer points = user.getPoints()+10;
+            user.setPoints(points);
+            user.addQuestion(uaq);
 
+            androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.guizToolbar);
+            String scoreText = getResources().getString(R.string.score);
+            scoreText+=" "+user.getPoints().toString();
+            toolbar.setTitle(scoreText);
+        }
+        else {
+            textField.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getCountry(),textField.getText().toString(),false);
+            user.addQuestion(uaq);
+        }
         delayAnswer();
     }
 
@@ -192,6 +207,7 @@ public class LandmarkFragment extends Fragment {
         {
             Bundle bundle = getArguments();
             questions =  bundle.getParcelableArrayList("landmarks");
+            user = bundle.getParcelable("userProfile");
             SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
             qpnum = preferences.getInt("qnumber",10);
         }
@@ -202,7 +218,6 @@ public class LandmarkFragment extends Fragment {
     private void Initialize() {
         ResetColors();
         LandmarksQuestions qq = questions.get(qnum);
-
         String flagname = qq.getLandmark();
         int id = getResources().getIdentifier(flagname,"drawable",getContext().getPackageName());
         imageView.setImageResource(id);

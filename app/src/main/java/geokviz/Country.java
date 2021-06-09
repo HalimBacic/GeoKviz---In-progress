@@ -16,7 +16,6 @@ public class Country {
     private String capitalCity;
     private ArrayList<String> neighbours = new ArrayList<>();
     private ArrayList<String> landmarks = new ArrayList<>();
-    private String info;
     private String continent;
     private int level;
 
@@ -30,8 +29,6 @@ public class Country {
         this.neighbours.addAll(Arrays.asList(neighbours.split(" ")));
 
         this.landmarks.addAll(Arrays.asList(neighbours.split(" ")));
-
-        this.info = info;
         this.continent = continent;
         this.level = level;
     }
@@ -74,14 +71,6 @@ public class Country {
 
     public void setLandmarks(ArrayList<String> landmarks) {
         this.landmarks = landmarks;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
     }
 
     public String getContinent() {

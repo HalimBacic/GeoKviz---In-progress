@@ -25,7 +25,7 @@ public abstract class Userdb extends RoomDatabase {
 
     private static Userdb buildDatabaseInstance(Context context) {
         return Room.databaseBuilder(context,
-                Userdb.class,"user.db").createFromAsset("user.db").build();
+                Userdb.class,"user.db").createFromAsset("base.db").build();
     }
 
     public void cleanUp(){

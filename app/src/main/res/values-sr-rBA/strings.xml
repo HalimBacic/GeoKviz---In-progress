@@ -19,4 +19,23 @@
     <string name="landmark">Kojoj državi pripada znamenitost?</string>
     <string name="neighbours">Odaberi susjednu državu</string>
     <string name="empty">Baza podataka je prazna</string>
+    <string name="turkey">Turska</string>
+    <string name="england">Engleska</string>
+    <string name="germany">Njemačka</string>
+    <string name="mexico">Meksiko</string>
+    <string name="brasil">Brazil</string>
+    <string name="france">Francuska</string>
+    <string name="australia">Australija</string>
+    <string name="canada">Kanada</string>
+    <string name="iraq">Irak</string>
+    <string name="denmark">Danska</string>
+    <string name="egypt">Egipat</string>
+    <string name="russia">Rusija</string>
+    <string name="china">Kina</string>
+    <string name="poland">Poljska</string>
+    <string name="nigeria">Nigerija</string>
+    <string name="morocco">Maroko</string>
+    <string name="south_africa">JAR</string>
+    <string name="saudi_arabia">Saudijska Arabija</string>
+    <string name="united_states">SAD</string>
 </resources>

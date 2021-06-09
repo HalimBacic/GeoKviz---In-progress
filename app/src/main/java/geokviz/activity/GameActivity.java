@@ -21,6 +21,7 @@ import java.util.Random;
 import geokviz.Country;
 import geokviz.FlagQuestions;
 import geokviz.LandmarksQuestions;
+import geokviz.User;
 import geokviz.fragments.NeighboursFragment;
 import geokviz.NeighboursQuestions;
 import geokviz.Question;
@@ -32,7 +33,6 @@ import geokviz.fragments.QuestionFragment;
 public class GameActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    Countrydb data;
     ArrayList<Question> questions = new ArrayList<>();
     ArrayList<FlagQuestions> flagQuestions = new ArrayList<>();
     ArrayList<LandmarksQuestions> landQuestions = new ArrayList<>();
@@ -44,11 +44,14 @@ public class GameActivity extends AppCompatActivity {
     Countrydb db;
     List<Country> list;
     String LANG_CURRENT="sr";
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+
         new Thread(
                 new Runnable() {
                     @Override
@@ -56,11 +59,7 @@ public class GameActivity extends AppCompatActivity {
 
                         db = Countrydb.getInstance(getApplicationContext());
                         list = db.getCountryDao().getAll();
-                        makeQuestion(list);
-                        makeFlagQuestions(list);
-                        makeLandmarkQuestions(list);
-
-                        makeNeighboursQuestions(list);
+                        InitializeData();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -74,17 +73,28 @@ public class GameActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.guizToolbar));
         setTitle(R.string.score);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void InitializeData()
+    {
+        user = new User(getIntent().getExtras().getString("user"));
+
+        makeQuestion(list);
+        makeFlagQuestions(list);
+        makeLandmarkQuestions(list);
+        makeNeighboursQuestions(list);
 
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("questions",questions);
         bundle.putParcelableArrayList("flags",flagQuestions);
         bundle.putParcelableArrayList("landmarks",landQuestions);
         bundle.putParcelableArrayList("neighbours",neighboursQuestions);
+        bundle.putParcelable("userProfile",user);
 
         questionFragment = new QuestionFragment();
-     //   flagFragment = new FlagFragment();
-     //   landFragment = new LandmarkFragment();
-    //    neighboursFragment = new NeighboursFragment();
+        //   flagFragment = new FlagFragment();
+        //   landFragment = new LandmarkFragment();
+        //    neighboursFragment = new NeighboursFragment();
         openFragment(questionFragment,bundle);
     }
 
@@ -112,7 +122,6 @@ public class GameActivity extends AppCompatActivity {
 
             //Dobija se generisan broj iz predhodnog bloka za pitanje koje se dodaje
             gc = list.get(num);
-            ArrayList<String> neighbours = gc.getNeighbours();
             numbers.add(num);
 
             //Generisanje pogrešnih odgovora
@@ -127,11 +136,12 @@ public class GameActivity extends AppCompatActivity {
 
             Collections.shuffle(allNeighboursCorrected);
 
+            ArrayList<String> neighbours = gc.getNeighbours();
             ArrayList<String> wrongs = new ArrayList<>();
             Integer c = 0;
             while(wrongs.size()<3)
             {
-                String n = allNeighboursCorrected.get(c);
+                String n = allNeighboursCorrected.get(c++);
                 boolean status2 = true;
                 for (String str:neighbours) {
                     if(str.equals(n)) status2 = false;
@@ -139,7 +149,6 @@ public class GameActivity extends AppCompatActivity {
 
                 if(status2) {
                     wrongs.add(n);
-                    c++;
                 }
             }
 
@@ -247,7 +256,7 @@ public class GameActivity extends AppCompatActivity {
             {
                 status = true;
                 int listSize = list.size()-1;
-                num = rand.nextInt(list.size()-1);
+                num = rand.nextInt(listSize);
                 if(!numbers.isEmpty())
                     for (Integer n : numbers) {
                         if(n==num) status = false;
@@ -294,7 +303,7 @@ public class GameActivity extends AppCompatActivity {
             this.finish();
         }
         else if(id == R.id.newsBtn)
-            Toast.makeText(this,"Implementirati",Toast.LENGTH_LONG);
+            Toast.makeText(this,"Implementirati",Toast.LENGTH_LONG).show();
         return super.onOptionsItemSelected(item);
     }
 

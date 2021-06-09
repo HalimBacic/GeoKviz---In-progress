@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.Random;
 
 import geokviz.NeighboursQuestions;
+import geokviz.User;
+import geokviz.UserAnswerQuestion;
 import geokviz.activity.R;
 
 /**
@@ -43,6 +45,7 @@ public class NeighboursFragment extends Fragment {
     TextView ansB;
     TextView ansC;
     TextView ansD;
+    User user;
     int qnum=0;
     int qpnum;
 
@@ -90,6 +93,7 @@ public class NeighboursFragment extends Fragment {
         {
             Bundle bundle = getArguments();
             questions =  bundle.getParcelableArrayList("neighbours");
+            user = bundle.getParcelable("userProfile");
             SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
             qpnum = preferences.getInt("qnumber",10);
         }
@@ -142,11 +146,23 @@ public class NeighboursFragment extends Fragment {
 
     private void checkIsValid(TextView textField) {
         NeighboursQuestions currentQuestion = questions.get(qnum-1);
-        if(checkAnswer(textField.getText().toString(),currentQuestion.getNeighbours()))
+        if(checkAnswer(textField.getText().toString(),currentQuestion.getNeighbours())) {
             textField.setBackgroundResource(R.color.correct);
-        else
-            textField.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getCountry(),textField.getText().toString(),true);
+            Integer points = user.getPoints()+10;
+            user.setPoints(points);
+            user.addQuestion(uaq);
 
+            androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.guizToolbar);
+            String scoreText = getResources().getString(R.string.score);
+            scoreText+=" "+user.getPoints().toString();
+            toolbar.setTitle(scoreText);
+        }
+        else {
+            textField.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getCountry(),textField.getText().toString(),false);
+            user.addQuestion(uaq);
+        }
         delayAnswer();
     }
 
@@ -187,7 +203,13 @@ public class NeighboursFragment extends Fragment {
         ResetColors();
         NeighboursQuestions qq = questions.get(qnum++);
         Integer neighboursSize = qq.getNeighbours().size();
-        question.setText(qq.getCountry());
+
+        int landNameId = getResources().getIdentifier(qq.getCountry().toLowerCase().replace(" ","_"),"string",getContext().getPackageName());
+        String landName = getResources().getString(landNameId);
+        String q = getResources().getString(R.string.question);
+        String qt = q +"  "+ landName;
+        question.setText(qt);
+
         Collections.shuffle(qq.getWrongs());
         Random random = new Random();
         int cnum = random.nextInt(3);
@@ -225,5 +247,4 @@ public class NeighboursFragment extends Fragment {
             ansD.setBackgroundResource(R.color.primaryDarkColorDay);
         }
     }
-
 }

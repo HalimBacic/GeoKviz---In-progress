@@ -26,6 +26,8 @@ import java.util.Random;
 
 import geokviz.FlagQuestions;
 import geokviz.Question;
+import geokviz.User;
+import geokviz.UserAnswerQuestion;
 import geokviz.activity.R;
 
 /**
@@ -45,6 +47,7 @@ public class FlagFragment extends Fragment {
     private String mParam2;
     ArrayList<FlagQuestions> flags = new ArrayList<>();
     ArrayList<TextView> chars = new ArrayList<>();
+    User user;
     TextView flagText;
     ImageView imageView;
     ImageButton nextBtn;
@@ -76,7 +79,6 @@ public class FlagFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
         imageView = (ImageView) getView().findViewById(R.id.imageFrame);
         nextBtn = (ImageButton) getView().findViewById(R.id.nextBtn);
         nextBtn.setClickable(false);
@@ -129,11 +131,23 @@ public class FlagFragment extends Fragment {
         FlagQuestions currentQuestion = flags.get(qnum-1);
         TextView text = (TextView) getActivity().findViewById(R.id.flagText);
         String input = text.getText().toString();
-        if(input.equals(currentQuestion.getAnswer()))
+        if(input.equals(currentQuestion.getAnswer())) {
             text.setBackgroundResource(R.color.correct);
-        else
-            text.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getAnswer(),text.getText().toString(),true);
+            Integer points = user.getPoints()+10;
+            user.setPoints(points);
+            user.addQuestion(uaq);
 
+            androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) getActivity().findViewById(R.id.guizToolbar);
+            String scoreText = getResources().getString(R.string.score);
+            scoreText+=" "+user.getPoints().toString();
+            toolbar.setTitle(scoreText);
+        }
+        else {
+            text.setBackgroundResource(R.color.incorrect);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getAnswer(),text.getText().toString(),false);
+            user.addQuestion(uaq);
+        }
         delayAnswer();
     }
 
@@ -210,6 +224,7 @@ public class FlagFragment extends Fragment {
         else
         {
             Bundle bundle = getArguments();
+            user = bundle.getParcelable("userProfile");
             flags =  bundle.getParcelableArrayList("flags");
             SharedPreferences preferences = getContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
             qpnum = preferences.getInt("qnumber",10);
