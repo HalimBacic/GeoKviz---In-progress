@@ -13,6 +13,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +24,7 @@ import geokviz.Country;
 import geokviz.FlagQuestions;
 import geokviz.LandmarksQuestions;
 import geokviz.User;
+import geokviz.fragments.InfoFragment;
 import geokviz.fragments.NeighboursFragment;
 import geokviz.NeighboursQuestions;
 import geokviz.Question;
@@ -41,8 +44,10 @@ public class GameActivity extends AppCompatActivity {
     FlagFragment flagFragment;
     LandmarkFragment landFragment;
     NeighboursFragment neighboursFragment;
+    Country c;
     Countrydb db;
     List<Country> list;
+    ArrayList<Country> shuffler = new ArrayList<>();
     String LANG_CURRENT="sr";
     User user;
 
@@ -92,9 +97,6 @@ public class GameActivity extends AppCompatActivity {
         bundle.putParcelable("userProfile",user);
 
         questionFragment = new QuestionFragment();
-        //   flagFragment = new FlagFragment();
-        //   landFragment = new LandmarkFragment();
-        //    neighboursFragment = new NeighboursFragment();
         openFragment(questionFragment,bundle);
     }
 
@@ -122,6 +124,7 @@ public class GameActivity extends AppCompatActivity {
 
             //Dobija se generisan broj iz predhodnog bloka za pitanje koje se dodaje
             gc = list.get(num);
+            shuffler.add(gc);
             numbers.add(num);
 
             //Generisanje pogrešnih odgovora
@@ -181,6 +184,7 @@ public class GameActivity extends AppCompatActivity {
 
             //Dobija se generisan broj iz predhodnog bloka za pitanje koje se dodaje
             gc = list.get(num);
+            shuffler.add(gc);
             numbers.add(num);
 
             //Generisanje pogrešnih odgovora
@@ -203,7 +207,7 @@ public class GameActivity extends AppCompatActivity {
                 wrongs.add(list.get(num2).getCountryName());
             }
             int brojLendmarka = gc.getLandmarks().size();
-            LandmarksQuestions lc = new LandmarksQuestions(gc.getLandmarks().get(brojLendmarka-1),gc.getCountryName(),wrongs);
+            LandmarksQuestions lc = new LandmarksQuestions(gc.getLandmarks().get(brojLendmarka-1),gc.getCountryName(),wrongs,gc.getContinent());
             landQuestions.add(lc);
         }
     }
@@ -226,7 +230,9 @@ public class GameActivity extends AppCompatActivity {
             }
             numbers.add(num);
             Country qc = list.get(num);
+            shuffler.add(qc);
             name = qc.getCountryName(); flag = qc.getCountryName().toLowerCase();
+            String hint = qc.getContinent();
             ArrayList<String> chars = new ArrayList<>();
 
             int secureLetters = name.length();
@@ -239,7 +245,7 @@ public class GameActivity extends AppCompatActivity {
                 chars.add(String.valueOf("abcdefghijklmnopqrstuvwxyz".toCharArray()[rand.nextInt("abcdefghijklmnopqrstuvwxyz".toCharArray().length)]));
             }
 
-            FlagQuestions q = new FlagQuestions(name,flag,chars);
+            FlagQuestions q = new FlagQuestions(name,flag,chars,hint);
             flagQuestions.add(q);
         }
 
@@ -264,6 +270,8 @@ public class GameActivity extends AppCompatActivity {
             }
             numbers.add(num);
             Country qc = list.get(num);
+            shuffler.add(qc);
+            String hint = qc.getContinent();
             name = qc.getCountryName(); correct = qc.getCapitalCity();
             ArrayList<String> incorrects = new ArrayList<>();
 
@@ -285,7 +293,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
 
-            Question q = new Question(name,correct,incorrects);
+            Question q = new Question(name,correct,incorrects,hint);
             questions.add(q);
         }
     }
@@ -300,11 +308,111 @@ public class GameActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            this.finish();
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+            if(!(fragment instanceof InfoFragment))
+                this.finish();
+            else
+                getSupportFragmentManager().popBackStackImmediate();
         }
-        else if(id == R.id.newsBtn)
-            Toast.makeText(this,"Implementirati",Toast.LENGTH_LONG).show();
+        else if(id == R.id.infoBtn) {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+            if(fragment instanceof QuestionFragment) {
+                QuestionFragment qf = (QuestionFragment) fragment;
+                if(qf.getNextBtn().getVisibility()== View.VISIBLE) {
+                    qf.checkIsValid(qf.getChecked());
+                    Country c = shuffler.get(qf.getQnum());
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("country", c);
+                    InfoFragment infofrag = new InfoFragment();
+                    openFragment(infofrag, bundle);
+                }
+                else
+                    Toast.makeText(getApplicationContext(),getResources().getString(R.string.youmustanswer),Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.temporary),Toast.LENGTH_LONG).show();
+            }
+        }
+
+        else if(id == R.id.hint)
+        {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+            if(user.getUsedHints()>0)
+                processFragmentHint(fragment);
+            else {
+                String msg = getResources().getString(R.string.noHintAnyMore);
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void processFragmentHint(Fragment fragment) {
+        if(fragment instanceof QuestionFragment)
+        {
+            QuestionFragment qf = (QuestionFragment) fragment;
+            Toast.makeText(getApplicationContext(),qf.getCurrentQuestion().getHint(),Toast.LENGTH_LONG).show();
+            Integer nh = qf.getUser().getUsedHints();
+            qf.getUser().setUsedHints(nh-1);
+        }
+        else if(fragment instanceof FlagFragment)
+        {
+            FlagFragment qf = (FlagFragment) fragment;
+            Toast.makeText(getApplicationContext(),qf.getCurrentQuestion().getHint(),Toast.LENGTH_LONG).show();
+            if(qf.getFlagText().getText().equals(""))
+            {
+                qf.getFlagText().setText(qf.getCurrentQuestion().getAnswer().substring(0,1));
+            }
+            Integer nh = qf.getUser().getUsedHints();
+            qf.getUser().setUsedHints(nh-1);
+        }
+        else if(fragment instanceof LandmarkFragment)
+        {
+            LandmarkFragment qf = (LandmarkFragment) fragment;
+            Toast.makeText(getApplicationContext(),qf.getCurrentQuestion().getHint(),Toast.LENGTH_LONG).show();
+            Integer nh = qf.getUser().getUsedHints();
+            qf.getUser().setUsedHints(nh-1);
+        }
+        else if(fragment instanceof NeighboursFragment)
+        {
+            NeighboursFragment qf = (NeighboursFragment) fragment;
+            NeighboursQuestions hq = qf.getCurrentQuestion();
+            int temp = 0; Random rand = new Random();
+            while(temp<2)
+            {
+                int temp2 = rand.nextInt(4);
+                switch (temp2)
+                {
+                    case 0:
+                        if(!hq.checkNeighbours(qf.getAnsA().getText().toString()) && !"".equals(qf.getAnsA().getText().toString()))
+                        {
+                            temp++; qf.getAnsA().setText("");
+                        }
+                        break;
+                    case 1:
+                        if(!hq.checkNeighbours(qf.getAnsB().getText().toString()) && !"".equals(qf.getAnsB().getText().toString()))
+                        {
+                            temp++; qf.getAnsB().setText("");
+                        }
+                        break;
+                    case 2:
+                        if(!hq.checkNeighbours(qf.getAnsC().getText().toString()) && !"".equals(qf.getAnsC().getText().toString()))
+                        {
+                            temp++; qf.getAnsC().setText("");
+                        }
+                        break;
+                    case 3:
+                        if(!hq.checkNeighbours(qf.getAnsD().getText().toString()) && !"".equals(qf.getAnsD().getText().toString()))
+                        {
+                            temp++; qf.getAnsD().setText("");
+                        }
+                        break;
+                }
+            }
+            Integer nh = qf.getUser().getUsedHints();
+            qf.getUser().setUsedHints(nh-1);
+        }
     }
 
     public void openFragment(Fragment fragment,Bundle bundle)
@@ -313,6 +421,7 @@ public class GameActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragmentContainer,fragment,"");
+        ft.addToBackStack("");
         ft.commit();
     }
 

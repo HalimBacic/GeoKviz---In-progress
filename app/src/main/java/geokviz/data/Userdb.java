@@ -14,7 +14,7 @@ public abstract class Userdb extends RoomDatabase {
     private static Userdb userdb;
 
 
-    public abstract UserDao getCountryDao();
+    public abstract UserDao getUserDao();
 
     public static  Userdb getInstance(Context context) {
         if (null == userdb) {

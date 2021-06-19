@@ -24,10 +24,10 @@ public class QuestionConverter {
         ArrayList<UserAnswerQuestion> list = new ArrayList<>();
 
         if (allinone != null) {
-            String[] allquest = allinone.split("|");
+            String[] allquest = allinone.split("\\|");
             for (String uaq : allquest) {
                 String[] splitetuaq = uaq.split("-");
-                UserAnswerQuestion userAnswerQuestion = new UserAnswerQuestion(splitetuaq[0],splitetuaq[1],Boolean.parseBoolean(splitetuaq[3]));
+                UserAnswerQuestion userAnswerQuestion = new UserAnswerQuestion(splitetuaq[0],splitetuaq[1],Boolean.parseBoolean(splitetuaq[2]));
                 list.add(userAnswerQuestion);
             }
             return list;

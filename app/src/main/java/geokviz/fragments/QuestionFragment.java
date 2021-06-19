@@ -50,6 +50,8 @@ public class QuestionFragment extends Fragment {
     private String mParam2;
     ArrayList<Question> questions;
     User user;
+    ImageButton nextBtn;
+    TextView checked;
     TextView question;
     TextView ansA;
     TextView ansB;
@@ -65,12 +67,13 @@ public class QuestionFragment extends Fragment {
         question = (TextView)getView().findViewById(R.id.question);
         ansA = (TextView)getView().findViewById(R.id.ansA); ansB = (TextView)getView().findViewById(R.id.ansB);
         ansC = (TextView)getView().findViewById(R.id.ansC); ansD = (TextView)getView().findViewById(R.id.ansD);
+        nextBtn = (ImageButton) getView().findViewById(R.id.nextBtn);
 
         ansA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ansB.setClickable(false); ansD.setClickable(false); ansC.setClickable(false);
-                checkIsValid(ansA);
+                checker(ansA);
             }
         });
 
@@ -78,7 +81,7 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ansA.setClickable(false); ansD.setClickable(false); ansC.setClickable(false);
-                checkIsValid(ansB);
+                checker(ansB);
             }
         });
 
@@ -86,7 +89,7 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ansA.setClickable(false); ansB.setClickable(false); ansD.setClickable(false);
-                checkIsValid(ansC);
+                checker(ansC);
             }
         });
 
@@ -94,14 +97,32 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ansA.setClickable(false); ansB.setClickable(false); ansC.setClickable(false);
-                checkIsValid(ansD);
+                checker(ansD);
             }
         });
 
         Initialize();
     }
 
-    private void checkIsValid(TextView textField) {
+    private void checker(TextView ans) {
+        checked = ans;
+        nextBtn.setVisibility(View.VISIBLE);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkIsValid(ans);
+            }
+        });
+        ans.setBackgroundResource(R.color.secondaryColorDay);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+
+
+    public void checkIsValid(TextView textField) {
         Question currentQuestion = questions.get(qnum-1);
         if(textField.getText() == currentQuestion.getCorrect()) {
             textField.setBackgroundResource(R.color.correct);
@@ -257,5 +278,34 @@ public class QuestionFragment extends Fragment {
             ansC.setBackgroundResource(R.color.primaryDarkColorDay);
             ansD.setBackgroundResource(R.color.primaryDarkColorDay);
         }
+    }
+
+    public int getQnum() {
+        return qnum-1;
+    }
+
+    public void setQnum(int qnum) {
+        this.qnum = qnum;
+    }
+
+    public Question getCurrentQuestion()
+    {
+        return questions.get(qnum-1);
+    }
+
+    public ImageButton getNextBtn() {
+        return nextBtn;
+    }
+
+    public void setNextBtn(ImageButton nextBtn) {
+        this.nextBtn = nextBtn;
+    }
+
+    public TextView getChecked() {
+        return checked;
+    }
+
+    public void setChecked(TextView checked) {
+        this.checked = checked;
     }
 }

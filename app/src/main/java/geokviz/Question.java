@@ -9,11 +9,13 @@ public class Question implements Parcelable {
     public String question;
     public String correct;
     public ArrayList<String> incorrect;
+    public String hint;
 
-    public Question(String question, String correct, ArrayList<String> incorrect) {
+    public Question(String question, String correct, ArrayList<String> incorrect,String hint) {
         this.question = question;
         this.correct = correct;
         this.incorrect = incorrect;
+        this.hint = hint;
     }
 
     protected Question(Parcel in) {
@@ -33,6 +35,14 @@ public class Question implements Parcelable {
             return new Question[size];
         }
     };
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
 
     public String getQuestion() {
         return question;

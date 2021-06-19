@@ -10,11 +10,17 @@ public class FlagQuestions implements Parcelable {
     private String flag;
     private String answer;
     private ArrayList<String> chars;
+    private String hint;
 
-    public FlagQuestions(String flag, String answer, ArrayList<String> chars) {
+    public FlagQuestions(String flag, String answer, ArrayList<String> chars,String hint) {
         this.flag = flag;
         this.answer = answer;
         this.chars = chars;
+        this.hint = hint;
+    }
+
+    public String getHint() {
+        return hint;
     }
 
     protected FlagQuestions(Parcel in) {

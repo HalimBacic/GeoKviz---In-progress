@@ -80,6 +80,7 @@
 
     <style name="labelText" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/primaryTextColorDay</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

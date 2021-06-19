@@ -2,20 +2,19 @@ package geokviz.data;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import geokviz.User;
-import geokviz.UserAnswerQuestion;
 
 @Dao
 public interface UserDao {
 
 
-    @Insert
-    void insertdb(User... contacts);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void insertdb(User contacts);
 
     @Query("Select * from User")
     List<User> getAll() throws Exception;

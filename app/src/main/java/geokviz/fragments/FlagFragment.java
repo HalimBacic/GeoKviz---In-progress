@@ -76,6 +76,14 @@ public class FlagFragment extends Fragment {
         return fragment;
     }
 
+    public TextView getFlagText() {
+        return flagText;
+    }
+
+    public void setFlagText(TextView flagText) {
+        this.flagText = flagText;
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -125,6 +133,7 @@ public class FlagFragment extends Fragment {
 
         Initialize();
     }
+
 
 
     private void checkIsValid() {
@@ -230,5 +239,14 @@ public class FlagFragment extends Fragment {
             qpnum = preferences.getInt("qnumber",10);
         }
         return view;
+    }
+
+    public FlagQuestions getCurrentQuestion()
+    {
+        return flags.get(qnum-1);
+    }
+
+    public User getUser() {
+        return user;
     }
 }

@@ -13,8 +13,9 @@ public class User implements Parcelable {
     @PrimaryKey
     @NonNull
     private String username;
-    private Integer points = 0;
     private ArrayList<UserAnswerQuestion> questions = new ArrayList<>();
+    private Integer points = 0;
+    private Integer usedHints = 3;
 
     public User(String username) {
         this.username = username;
@@ -27,6 +28,14 @@ public class User implements Parcelable {
         } else {
             points = in.readInt();
         }
+    }
+
+    public Integer getUsedHints() {
+        return usedHints;
+    }
+
+    public void setUsedHints(Integer usedHints) {
+        this.usedHints = usedHints;
     }
 
     @Override

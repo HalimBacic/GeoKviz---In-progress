@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="geokviz.activity">
+    <permission
+        android:name="com.example.app.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <!-- Permission to receive Google Maps -->
+    <uses-permission android:name="com.example.app.permission.MAPS_RECEIVE" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +25,9 @@
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

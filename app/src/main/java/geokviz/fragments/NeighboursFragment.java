@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Random;
 
 import geokviz.NeighboursQuestions;
+import geokviz.Question;
 import geokviz.User;
 import geokviz.UserAnswerQuestion;
 import geokviz.activity.R;
@@ -183,7 +184,13 @@ public class NeighboursFragment extends Fragment {
                             Initialize();
                         else
                         {
-
+                            Bundle bundle = getArguments();
+                            SuccesFragment fragment = new SuccesFragment();
+                            fragment.setArguments(bundle);
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            ft.replace(R.id.fragmentContainer,fragment,"");
+                            ft.commit();
                         }
                     }
                 });
@@ -206,7 +213,7 @@ public class NeighboursFragment extends Fragment {
 
         int landNameId = getResources().getIdentifier(qq.getCountry().toLowerCase().replace(" ","_"),"string",getContext().getPackageName());
         String landName = getResources().getString(landNameId);
-        String q = getResources().getString(R.string.question);
+        String q = getResources().getString(R.string.neighbours);
         String qt = q +"  "+ landName;
         question.setText(qt);
 
@@ -246,5 +253,30 @@ public class NeighboursFragment extends Fragment {
             ansC.setBackgroundResource(R.color.primaryDarkColorDay);
             ansD.setBackgroundResource(R.color.primaryDarkColorDay);
         }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public TextView getAnsA() {
+        return ansA;
+    }
+
+    public TextView getAnsB() {
+        return ansB;
+    }
+
+    public TextView getAnsC() {
+        return ansC;
+    }
+
+    public TextView getAnsD() {
+        return ansD;
+    }
+
+    public NeighboursQuestions getCurrentQuestion()
+    {
+        return questions.get(qnum-1);
     }
 }

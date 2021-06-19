@@ -16,6 +16,7 @@
     <string name="flag">Which country does the flag belong to?</string>
     <string name="landmark">Which country does the landmark belong to?</string>
     <string name="neighbours">Pick neighbour</string>
+    <string name="share">Share</string>
 
     <string name="turkey">Turkey</string>
     <string name="england">England</string>
@@ -37,8 +38,14 @@
     <string name="nigeria">Nigeria</string>
     <string name="morocco">Morocco</string>
 
+
     <string name="inputUser">Your name?</string>
+    <string name="noHintAnyMore">You spent all hints</string>
+    <string name="temporary">Informations only for capitals</string>
+    <string name="youmustanswer">Answer the question first</string>
     <string name="score">Score</string>
     <string name="news">News</string>
     <string name="empty">Base is empty</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

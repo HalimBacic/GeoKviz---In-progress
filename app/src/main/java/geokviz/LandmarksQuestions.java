@@ -9,13 +9,18 @@ public class LandmarksQuestions implements Parcelable{
     private String landmark;
     private String country;
     private ArrayList<String> wrongs;
+    private String hint;
 
-    public LandmarksQuestions(String landmark, String country, ArrayList<String> wrongs) {
+    public LandmarksQuestions(String landmark, String country, ArrayList<String> wrongs,String hint) {
         this.landmark = landmark;
         this.country = country;
         this.wrongs = wrongs;
+        this.hint = hint;
     }
 
+    public String getHint() {
+        return hint;
+    }
 
     public LandmarksQuestions(Parcel in) {
         landmark = in.readString();

@@ -4,9 +4,13 @@
     >
 
     <item
-        android:id="@+id/newsBtn"
+        android:id="@+id/infoBtn"
         android:title="@string/news"
         app:showAsAction="ifRoom"
         android:icon="@mipmap/ic_info_round"
         />
+    <item android:id="@+id/hint"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/ic_hint"
+        android:title="Hint" />
 </menu>

@@ -1,27 +1,26 @@
 package geokviz.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import geokviz.User;
-import geokviz.data.Countrydb;
 import geokviz.data.Userdb;
+import geokviz.fragments.TableFragment;
 
 public class ResultActivity extends AppCompatActivity {
 
     Userdb userdb;
-    List<User> users = new ArrayList<>();
-
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
+    ArrayList<User> users = new ArrayList<>();
+    Bundle bundle = new Bundle();
+    TableFragment fragment = new TableFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +31,28 @@ public class ResultActivity extends AppCompatActivity {
                 () -> {
 
                     userdb = Userdb.getInstance(getApplicationContext());
+                    try {
+                        users = (ArrayList<User>) userdb.getUserDao().getAll();
+                        bundle.putParcelableArrayList("results",users);
+
+                        openFragment();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     runOnUiThread(() -> {
 
                     });
                 }
         ).start();
 
-        try {
-            users = userdb.getCountryDao().getAll();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),getResources().getText(R.string.empty),Toast.LENGTH_LONG).show();
-        }
+    }
 
-        recyclerView = findViewById(R.id.resultRecycler);
-
-        recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new Adapter((ArrayList<User>) users);
-        recyclerView.setAdapter(adapter);
+    private void openFragment() {
+        fragment.setArguments(bundle);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragmentResults,fragment,"");
+        ft.commit();
     }
 }

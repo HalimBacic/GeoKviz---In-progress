@@ -38,4 +38,8 @@
     <string name="south_africa">JAR</string>
     <string name="saudi_arabia">Saudijska Arabija</string>
     <string name="united_states">SAD</string>
+    <string name="share">Podijeli</string>
+    <string name="noHintAnyMore">Nemate više pomoć</string>
+    <string name="temporary">Informacije dostupne za glavne gradove</string>
+    <string name="youmustanswer">Prvo odgovorite na pitanje</string>
 </resources>

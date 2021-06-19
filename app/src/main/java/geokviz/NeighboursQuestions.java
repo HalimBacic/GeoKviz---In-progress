@@ -70,4 +70,13 @@ public class NeighboursQuestions implements Parcelable {
         dest.writeStringList(neighbours);
         dest.writeStringList(wrongs);
     }
+
+    public boolean checkNeighbours(String n)
+    {
+        for (String neig: neighbours ){
+            if(neig.equals(n))
+                return true;
+        }
+        return false;
+    }
 }

@@ -16,6 +16,9 @@ public interface CountryDao {
     @Query("Select * from Country")
     List<Country> getAll();
 
+    @Query("Select * from Country where countryName= :n")
+    Country getCountry(String n);
+
     @Query("Select * from Country where level= :l")
     List<Country> getOnLevel(int l);
 

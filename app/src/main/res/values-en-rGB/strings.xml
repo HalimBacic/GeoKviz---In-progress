@@ -38,4 +38,8 @@
     <string name="south_africa">South Africa</string>
     <string name="saudi_arabia">Saudi Arabija</string>
     <string name="united_states">USA</string>
+    <string name="share">Share</string>
+    <string name="noHintAnyMore">You spent all hints</string>
+    <string name="temporary">Informations only for capitals</string>
+    <string name="youmustanswer">Answer the question first</string>
 </resources>

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 
+import geokviz.FlagQuestions;
 import geokviz.LandmarksQuestions;
 import geokviz.Question;
 import geokviz.User;
@@ -150,6 +151,15 @@ public class LandmarkFragment extends Fragment {
             user.addQuestion(uaq);
         }
         delayAnswer();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public LandmarksQuestions getCurrentQuestion()
+    {
+        return questions.get(qnum-1);
     }
 
     private void delayAnswer() {
