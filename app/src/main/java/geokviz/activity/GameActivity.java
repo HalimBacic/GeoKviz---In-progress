@@ -189,7 +189,7 @@ public class GameActivity extends AppCompatActivity {
 
             //Generisanje pogrešnih odgovora
             ArrayList<String> wrongs = new ArrayList<>();
-            for(int j=0;j<4;j++)
+  /*          for(int j=0;j<3;j++)
             {
                 ArrayList<Integer> nums = new ArrayList<>();
                 int num2=0;
@@ -205,7 +205,25 @@ public class GameActivity extends AppCompatActivity {
                 }
                 nums.add(num2);
                 wrongs.add(list.get(num2).getCountryName());
+            } */
+
+            for(int j=0;j<3;j++)
+            {
+                status = false; int num2=0;
+                while(!status)
+                {
+                    num2 = rand.nextInt(list.size()-1);
+                    if(num2 != num) {
+                        status = true;
+                        String inc = list.get(num2).getCountryName();
+                        for (String inct : wrongs)
+                            if(inct.equals(inc))  status=false;
+                        if(status)
+                            wrongs.add(list.get(num2).getCountryName());
+                    }
+                }
             }
+
             int brojLendmarka = gc.getLandmarks().size();
             LandmarksQuestions lc = new LandmarksQuestions(gc.getLandmarks().get(brojLendmarka-1),gc.getCountryName(),wrongs,gc.getContinent());
             landQuestions.add(lc);
@@ -286,8 +304,8 @@ public class GameActivity extends AppCompatActivity {
                         status = true;
                         String inc = list.get(num2).getCapitalCity();
                         for (String inct : incorrects)
-                            if(inct==inc)  status=false;
-                        if(status == true)
+                            if(inct.equals(inc))  status=false;
+                        if(status)
                         incorrects.add(list.get(num2).getCapitalCity());
                     }
                 }

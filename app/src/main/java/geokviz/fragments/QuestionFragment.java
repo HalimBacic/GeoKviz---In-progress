@@ -126,7 +126,7 @@ public class QuestionFragment extends Fragment {
         Question currentQuestion = questions.get(qnum-1);
         if(textField.getText() == currentQuestion.getCorrect()) {
             textField.setBackgroundResource(R.color.correct);
-            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getQuestion(),textField.getText().toString(),true);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(getResources().getString(R.string.question)+currentQuestion.getQuestion(),textField.getText().toString(),true);
             Integer points = user.getPoints()+10;
             user.setPoints(points);
             user.addQuestion(uaq);
@@ -139,9 +139,10 @@ public class QuestionFragment extends Fragment {
         }
         else {
             textField.setBackgroundResource(R.color.incorrect);
-            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getQuestion(),textField.getText().toString(),false);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(getResources().getString(R.string.question)+currentQuestion.getQuestion(),textField.getText().toString(),false);
             user.addQuestion(uaq);
         }
+        nextBtn.setVisibility(View.INVISIBLE);
         delayAnswer();
     }
 

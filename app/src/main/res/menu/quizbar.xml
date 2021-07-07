@@ -13,4 +13,9 @@
         app:showAsAction="ifRoom"
         android:icon="@mipmap/ic_hint"
         android:title="Hint" />
+    <item android:id="@+id/share"
+        app:showAsAction="ifRoom"
+        android:visible="false"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:title="@string/share" />
 </menu>

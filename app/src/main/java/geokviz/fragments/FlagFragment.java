@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -51,6 +53,7 @@ public class FlagFragment extends Fragment {
     TextView flagText;
     ImageView imageView;
     ImageButton nextBtn;
+    Toolbar toolbar;
     int qpnum;
     int qnum=0;
 
@@ -90,6 +93,11 @@ public class FlagFragment extends Fragment {
         imageView = (ImageView) getView().findViewById(R.id.imageFrame);
         nextBtn = (ImageButton) getView().findViewById(R.id.nextBtn);
         nextBtn.setClickable(false);
+
+        toolbar = (Toolbar) getActivity().findViewById(R.id.guizToolbar);
+        MenuItem info = toolbar.getMenu().findItem(R.id.infoBtn);
+        info.setVisible(false);
+
         chars.add((TextView) getView().findViewById(R.id.flagAns1));
         chars.add((TextView) getView().findViewById(R.id.flagAns2));
         chars.add((TextView) getView().findViewById(R.id.flagAns3));
@@ -142,7 +150,7 @@ public class FlagFragment extends Fragment {
         String input = text.getText().toString();
         if(input.equals(currentQuestion.getAnswer())) {
             text.setBackgroundResource(R.color.correct);
-            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getAnswer(),text.getText().toString(),true);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(getResources().getString(R.string.flag)+currentQuestion.getAnswer(),text.getText().toString(),true);
             Integer points = user.getPoints()+10;
             user.setPoints(points);
             user.addQuestion(uaq);
@@ -154,7 +162,7 @@ public class FlagFragment extends Fragment {
         }
         else {
             text.setBackgroundResource(R.color.incorrect);
-            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getAnswer(),text.getText().toString(),false);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(getResources().getString(R.string.flag)+currentQuestion.getAnswer(),text.getText().toString(),false);
             user.addQuestion(uaq);
         }
         delayAnswer();

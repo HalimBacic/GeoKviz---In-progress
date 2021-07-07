@@ -24,13 +24,14 @@
         android:layout_marginTop="32dp"
         android:background="@color/secondaryColorDay"
         android:gravity="center"
-        android:text="@string/cacheMode"
+        android:text="@string/cacheModeOn"
         android:textColor="@color/primaryTextColorDay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/srBtn"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        tools:ignore="UseSwitchCompatOrMaterialXml"
+        android:checked="false"/>
 
     <ImageButton
         android:id="@+id/backBtn"

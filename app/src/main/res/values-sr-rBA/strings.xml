@@ -42,4 +42,13 @@
     <string name="noHintAnyMore">Nemate više pomoć</string>
     <string name="temporary">Informacije dostupne za glavne gradove</string>
     <string name="youmustanswer">Prvo odgovorite na pitanje</string>
+    <string name="level1">Moraš učiti geografiju!</string>
+    <string name="level2">Možeš biti i bolji!</string>
+    <string name="level3">Dobar rezultat!</string>
+    <string name="level4">Ti voliš geografiju!</string>
+    <string name="level5">Ti si odličan! Čestitam!</string>
+    <string name="viewOnMap">Mapa</string>
+    <string name="cacheModeOn">Uključi memorisanje</string>
+    <string name="cacheModeOff">Isključi memorisanje</string>
+    <string name="cachedMsg">Memorisane vijesti</string>
 </resources>

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton settingsBtn;
     TextInputEditText username;
     Button resBtn;
+    Button newsBtn;
     Button exitBtn;
     Button newGameBtn;
     String LANG_CURRENT = "sr";
@@ -49,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent resultsIntent = new Intent(MainActivity.this,ResultActivity.class);
                 startActivity(resultsIntent);
+            }
+        });
+
+        newsBtn = (Button) findViewById(R.id.newsBtn);
+        newsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,NewsActivity.class);
+                startActivity(intent);
             }
         });
 

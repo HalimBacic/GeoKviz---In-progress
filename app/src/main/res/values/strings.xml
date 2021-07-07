@@ -6,10 +6,11 @@
     <string name="name">Name</string>
     <string name="lang_en">English</string>
     <string name="lang_sr">Serbian</string>
-    <string name="cacheMode">Enable cache</string>
+    <string name="cacheModeOn">Enable cache</string>
+    <string name="cacheModeOff">Disable cache</string>
     <string name="numq10">10 Questions</string>
     <string name="numq5">5 Questions</string>
-
+    <string name="cachedMsg">Cached news</string>
     <string name="questions">Questions</string>
 
     <string name="question">Which is capital city of </string>
@@ -38,7 +39,7 @@
     <string name="nigeria">Nigeria</string>
     <string name="morocco">Morocco</string>
 
-
+    <string name="viewOnMap">Show Map</string>
     <string name="inputUser">Your name?</string>
     <string name="noHintAnyMore">You spent all hints</string>
     <string name="temporary">Informations only for capitals</string>
@@ -46,6 +47,12 @@
     <string name="score">Score</string>
     <string name="news">News</string>
     <string name="empty">Base is empty</string>
+    <string name="level1">"You must learn geography!"</string>
+    <string name="level2">"You can be better!"</string>
+    <string name="level3">"You are pretty good!"</string>
+    <string name="level4">"You love geography!"</string>
+    <string name="level5">"You are master! Congatulations!"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

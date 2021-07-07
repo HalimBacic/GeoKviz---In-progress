@@ -26,10 +26,9 @@
         android:text="@string/results"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newGameBtn"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.094" />
 
     <Button
         android:id="@+id/exitBtn"
@@ -40,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resBtn"
-        app:layout_constraintVertical_bias="0.306" />
+        app:layout_constraintVertical_bias="0.582" />
 
     <ImageButton
         android:id="@+id/settingBtn"
@@ -70,5 +69,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/newsBtn"
+        android:layout_width="@dimen/generalButtonWidth"
+        android:layout_height="@dimen/generalButtonHeight"
+        android:text="@string/news"
+        app:layout_constraintBottom_toTopOf="@+id/exitBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resBtn"
+        app:layout_constraintVertical_bias="0.54" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

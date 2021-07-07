@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Color for day mode -->
-    <color name="primaryColorDay">#2e7d32</color>
-    <color name="primaryLightColorDay">#60ad5e</color>
+    <color name="primaryColorDay">#40AC46</color>
+    <color name="primaryLightColorDay">#6DE86A</color>
     <color name="primaryDarkColorDay">#005005</color>
     <color name="secondaryColorDay">#3f51b5</color>
     <color name="secondaryLightColorDay">#757de8</color>
@@ -17,7 +17,9 @@
     <color name="secondaryLightColorNight">#62727b</color>
     <color name="secondaryDarkColorNight">#102027</color>
     <color name="primaryTextColorNight">#000000</color>
+    <color name="black">#000000</color>
     <color name="secondaryTextColorNight">#ffffff</color>
+    <color name="white">#ffffff</color>
 
     <!-- Other colors -->
     <color name="correct">#2edf06</color>

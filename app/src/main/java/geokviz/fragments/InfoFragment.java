@@ -1,20 +1,29 @@
 package geokviz.fragments;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -23,6 +32,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.text.DecimalFormat;
 
 import geokviz.Country;
+import geokviz.activity.MapsActivity;
+import geokviz.activity.NewsActivity;
 import geokviz.activity.R;
 
 /**
@@ -44,7 +55,10 @@ public class InfoFragment extends Fragment {
     private TextView cityName;
     private TextView citizens;
     private ImageView emblem;
-    private MapView map;
+    private Button mapBtn;
+    private Button newsBtn;
+    private Double lat;
+    private Double lng;
 
     public InfoFragment() {
         // Required empty public constructor
@@ -76,18 +90,29 @@ public class InfoFragment extends Fragment {
         cityName = (TextView) getView().findViewById(R.id.cityName);
         citizens = (TextView) getView().findViewById(R.id.citizens);
         emblem = (ImageView) getView().findViewById(R.id.emblem);
-        String emb = "ic_"+country.getCapitalCity().toLowerCase().replace(" ","")+"emblem";
-        emblem.setImageResource(getResources().getIdentifier(emb,"mipmap",getContext().getPackageName()));
+        String emb = "ic_" + country.getCapitalCity().toLowerCase().replace(" ", "") + "emblem";
+        emblem.setImageResource(getResources().getIdentifier(emb, "mipmap", getContext().getPackageName()));
 
-        map.getMapAsync(new OnMapReadyCallback() {
+
+        mapBtn = (Button) getView().findViewById(R.id.mapBtn);
+
+        mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onMapReady(GoogleMap googleMap) {
-                Log.i("DEBUG", "onMapReady");
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),MapsActivity.class);
+                intent.putExtra("lat", lng);
+                intent.putExtra("lng",lat);// pass your values and retrieve them in the other Activity using keyName
+                startActivity(intent);
+            }
+        });
 
-                LatLng position = new LatLng(country.getLatitude(),country.getLongitude());
-                Marker marker = googleMap.addMarker(new MarkerOptions().position(position).title(country.getCapitalCity()));
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(position, 0);
-                googleMap.animateCamera(cameraUpdate);
+        newsBtn = (Button) getView().findViewById(R.id.newsBtn);
+        newsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NewsActivity.class);
+                intent.putExtra("city",country.getCapitalCity());
+                startActivity(intent);
             }
         });
 
@@ -104,6 +129,8 @@ public class InfoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
             country = getArguments().getParcelable("country");
+            lat = country.getLatitude();
+            lng = country.getLongitude();
         }
     }
 
@@ -112,8 +139,6 @@ public class InfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_info, container, false);
-        map = (MapView) view.findViewById(R.id.mapView);
-        map.onCreate(savedInstanceState);
         return view;
     }
 }

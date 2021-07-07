@@ -4,72 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryColorDay"
-    tools:context="geokviz.fragments.SuccesFragment">
+    tools:context="geokviz.fragments.SuccesFragment"
+    android:layout_gravity="center">
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="414dp"
-        android:layout_height="165dp"
-        android:layout_marginBottom="64dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textView3"
-            style="@style/labelText"
-            android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:text="@string/share" />
-
-        <LinearLayout
-            android:layout_width="402dp"
-            android:layout_height="125dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/instShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@mipmap/ic_instagram_foreground" />
-
-            <ImageButton
-                android:id="@+id/fbshare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@mipmap/ic_facebook_foreground" />
-        </LinearLayout>
-
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/userNameSucces"
         style="@style/questionTextView"
         android:layout_width="269dp"
         android:layout_height="71dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="60dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="227dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="180dp"
+    <RelativeLayout
+        android:id="@+id/mylayout"
+        android:layout_width="369dp"
+        android:layout_height="405dp"
+        android:layout_marginBottom="92dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.912"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/upText"
+            style="@style/labelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/downText"
+            style="@style/labelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25dp" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="290dp"
+            android:layout_height="296dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="33dp" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

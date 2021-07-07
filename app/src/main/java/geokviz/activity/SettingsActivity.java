@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Switch;
 
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -30,11 +31,53 @@ public class SettingsActivity extends AppCompatActivity {
     Button srBtn;
     String LANG_CURRENT = "sr-rBA";
     public Boolean languageChanged=false;
+    Switch switchCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        SharedPreferences sp = getSharedPreferences("preferences",MODE_PRIVATE);
+
+        switchCache = (Switch) findViewById(R.id.switch1);
+        Integer valuec = sp.getInt("cache",0);
+
+        if(valuec==1) {
+            switchCache.setChecked(true);
+            switchCache.setText(getResources().getString(R.string.cacheModeOff));
+        }
+        else{
+            switchCache.setChecked(false);
+            switchCache.setText(getResources().getString(R.string.cacheModeOn));
+        }
+
+
+        switchCache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!switchCache.isChecked())   //true ako je lijevo
+                {
+                    switchCache.setText(getResources().getString(R.string.cacheModeOn));
+                    changeCacheMode(0);
+                }
+                else
+                {
+                    switchCache.setText(getResources().getString(R.string.cacheModeOff));
+                    changeCacheMode(1);
+                }
+            }
+
+            private void changeCacheMode(Integer i)
+            {
+                SharedPreferences sharedPreferences = getSharedPreferences("preferences",MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putInt("cache",i);
+                edit.commit();
+            }
+        });
+
+
+
         backBtn = (ImageButton) findViewById(R.id.backBtn);
 
         if(getIntent().hasExtra("lc"))
@@ -56,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
         settingBtn = (Button) findViewById(R.id.qnumBtn);
 
 
-        SharedPreferences sp = getSharedPreferences("preferences",MODE_PRIVATE);
+
         Integer value = sp.getInt("qnumber",10);
         String valueText = value.toString()+" "+ getResources().getString(R.string.questions);
 

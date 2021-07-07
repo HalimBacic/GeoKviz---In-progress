@@ -99,6 +99,7 @@
         android:layout_marginBottom="44dp"
         android:src="@mipmap/ic_go_round"
         android:visibility="invisible"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.86"

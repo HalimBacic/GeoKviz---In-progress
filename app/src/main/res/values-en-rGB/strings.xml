@@ -42,4 +42,13 @@
     <string name="noHintAnyMore">You spent all hints</string>
     <string name="temporary">Informations only for capitals</string>
     <string name="youmustanswer">Answer the question first</string>
+    <string name="level1">You must learn geography!</string>
+    <string name="level2">You can be better!</string>
+    <string name="level3">You are pretty good!</string>
+    <string name="level4">You love geography!</string>
+    <string name="level5">You are master! Congatulations!</string>
+    <string name="viewOnMap">Show Map</string>
+    <string name="cacheModeOn">Enable cache</string>
+    <string name="cacheModeOff">Disable cache</string>
+    <string name="cachedMsg">Cached news</string>
 </resources>

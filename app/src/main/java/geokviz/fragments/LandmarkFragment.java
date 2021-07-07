@@ -7,12 +7,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -53,6 +55,7 @@ public class LandmarkFragment extends Fragment {
     TextView ansC;
     TextView ansD;
     ImageButton next;
+    Toolbar toolbar;
     User user;
     int qnum=0;
     int qpnum;
@@ -95,6 +98,10 @@ public class LandmarkFragment extends Fragment {
         ansA = (TextView)getView().findViewById(R.id.ansA); ansB = (TextView)getView().findViewById(R.id.ansB);
         ansC = (TextView)getView().findViewById(R.id.ansC); ansD = (TextView)getView().findViewById(R.id.ansD);
 
+        toolbar = (Toolbar) getActivity().findViewById(R.id.guizToolbar);
+        MenuItem info = toolbar.getMenu().findItem(R.id.infoBtn);
+        info.setVisible(false);
+
         ansA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +142,7 @@ public class LandmarkFragment extends Fragment {
         LandmarksQuestions currentQuestion = questions.get(qnum-1);
         if(textField.getText() == currentQuestion.getCountry()) {
             textField.setBackgroundResource(R.color.correct);
-            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getCountry(),textField.getText().toString(),true);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(getResources().getString(R.string.landmark)+currentQuestion.getCountry(),textField.getText().toString(),true);
             Integer points = user.getPoints()+10;
             user.setPoints(points);
             user.addQuestion(uaq);
@@ -147,7 +154,7 @@ public class LandmarkFragment extends Fragment {
         }
         else {
             textField.setBackgroundResource(R.color.incorrect);
-            UserAnswerQuestion uaq = new UserAnswerQuestion(currentQuestion.getCountry(),textField.getText().toString(),false);
+            UserAnswerQuestion uaq = new UserAnswerQuestion(getResources().getString(R.string.landmark)+currentQuestion.getCountry(),textField.getText().toString(),false);
             user.addQuestion(uaq);
         }
         delayAnswer();

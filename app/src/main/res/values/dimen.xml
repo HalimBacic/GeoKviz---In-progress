@@ -10,4 +10,5 @@
     <dimen name="textSizeTwo">18dp</dimen>
     <dimen name="textSizeLetter">19dp</dimen>
     <dimen name="generalTextPaddingSmall">3dp</dimen>
+    <dimen name="itemMargin">10dp</dimen>
 </resources>
